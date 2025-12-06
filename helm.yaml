@@ -1,0 +1,36 @@
+image:
+  tag: "latest"
+
+pvc:
+  enabled: true
+  size: 100Mi
+  accessMode: ReadWriteOnce
+
+env:
+  - name: DOMAIN
+    value: "https://vault-helm.basarsoft.com.tr"
+  - name: SIGNUPS_ALLOWED
+    value: "true"
+  - name: ADMIN_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: vaultwarden-secrets
+        key: ADMIN_TOKEN
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  class_name: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: vault-helm.basarsoft.com.tr
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - vault-helm.basarsoft.com.tr
