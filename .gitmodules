@@ -1,0 +1,6 @@
+[submodule "k3s-infra"]
+	path = k3s-infra
+	url = https://github.com/Kutibios/k3s-infra.git
+[submodule "vaultwarden-app"]
+	path = vaultwarden-app
+	url = https://github.com/Kutibios/vaultwarden-app.git
